@@ -14,7 +14,13 @@ const VOICE_PROFILES: Record<string, string> = {
 
 // 官方客户端（负责文字分析、多模态、声音合成）
 const getClient = async (): Promise<GoogleGenAI> => {
-  const apiKey = process.env.API_KEY || "YOUR_OFFICIAL_API_KEY"; // 这里填您真实的官方 Gemini Key
+  const localKey = typeof window !== 'undefined' ? localStorage.getItem('gemini_api_key') : null;
+  const apiKey = localKey || process.env.API_KEY || "YOUR_OFFICIAL_API_KEY"; 
+  
+  if (!apiKey || apiKey === "YOUR_OFFICIAL_API_KEY") {
+      throw new Error("API Key 未配置！请在页面右上角填入您的官方 Gemini API Key。");
+  }
+  
   return new GoogleGenAI({ apiKey: apiKey });
 };
 

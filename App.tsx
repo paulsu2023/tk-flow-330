@@ -241,7 +241,17 @@ function App() {
                 </button>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs font-medium bg-slate-900 p-1 rounded-full border border-slate-800">
+          <div className="flex items-center gap-2 text-xs font-medium">
+             <div className="mr-4">
+                <input 
+                   type="password"
+                   placeholder="🔑 填入您的 Gemini API Key..."
+                   defaultValue={localStorage.getItem('gemini_api_key') || ''}
+                   onChange={(e) => localStorage.setItem('gemini_api_key', e.target.value)}
+                   className="bg-slate-900 border border-slate-700 focus:border-brand-500 rounded-full px-4 py-1.5 w-[200px] outline-none text-brand-300 placeholder-slate-600 shadow-inner transition-all focus:w-[250px] text-[11px]"
+                />
+             </div>
+             <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-full border border-slate-800">
              <button 
                 onClick={() => setState(prev => ({...prev, activeStep: 0}))}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-full transition-all cursor-pointer ${state.activeStep === 0 ? 'bg-brand-600 text-white shadow' : 'text-slate-500 hover:text-slate-300'}`}
